@@ -42,7 +42,7 @@ func initRoutes(e *echo.Echo, db *sql.DB) {
 	e.GET("/series", handlers.GetSeries(db))
 	e.GET("/recommendation/movie", handlers.GetMovieRecommendation(db))
 	e.GET("/recommendation/serie", handlers.GetSerieRecommendation(db))
-	// e.GET("/rating/:name", handlers.GetRating(db))
+	e.GET("/rating/:name", handlers.GetRating(db))
 
 	// e.POST("/recommendation", handlers.PostRecommendation(db))
 	// e.POST("/movie", handlers.PostMovie(db))
