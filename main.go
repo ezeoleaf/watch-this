@@ -3,14 +3,23 @@ package main
 import (
 	"database/sql"
 	"net/http"
+	"os"
 
+	"github.com/joho/godotenv"
 	"github.com/labstack/echo"
 	"github.com/labstack/echo/middleware"
 	_ "github.com/mattn/go-sqlite3"
 )
 
 func main() {
-	db := initDB("watch.db")
+	err := godotenv.Load()
+	if err != nil {
+		panic("Error loading .env file")
+	}
+
+	dbName := os.Getenv("DATABASE_NAME")
+
+	db := initDB(dbName)
 	migrate(db)
 
 	e := echo.New()
@@ -27,17 +36,17 @@ func initRoutes(e *echo.Echo, db *sql.DB) {
 	e.GET("/", func(c echo.Context) error {
 		return c.String(http.StatusOK, "Welcome to WatchThis")
 	})
-	e.GET("/recommendation", handlers.GetRecommendation(db))
-	e.GET("/movies", handlers.GetMovies(db))
-	e.GET("/series", handlers.GetSeries(db))
-	e.GET("/recommendation/movie", handlers.GetMovieRecommendation(db))
-	e.GET("/recommendation/serie", handlers.GetSerieRecommendation(db))
-	e.GET("/rating/:name", handlers.GetRating(db))
+	// e.GET("/recommendation", handlers.GetRecommendation(db))
+	// e.GET("/movies", handlers.GetMovies(db))
+	// e.GET("/series", handlers.GetSeries(db))
+	// e.GET("/recommendation/movie", handlers.GetMovieRecommendation(db))
+	// e.GET("/recommendation/serie", handlers.GetSerieRecommendation(db))
+	// e.GET("/rating/:name", handlers.GetRating(db))
 
-	// e.POST("/recommendation", handlers.PostRecommendation(db))
-	e.POST("/movie", handlers.PostMovie(db))
-	e.POST("/serie", handlers.PostSerie(db))
-	e.POST("/watched", handlers.PostWatched(db))
+	// // e.POST("/recommendation", handlers.PostRecommendation(db))
+	// e.POST("/movie", handlers.PostMovie(db))
+	// e.POST("/serie", handlers.PostSerie(db))
+	// e.POST("/watched", handlers.PostWatched(db))
 
 }
 
