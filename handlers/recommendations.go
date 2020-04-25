@@ -4,6 +4,8 @@ import (
 	"database/sql"
 	"net/http"
 
+	"github.com/ezeoleaf/watch-this/models"
+
 	"github.com/labstack/echo"
 )
 
