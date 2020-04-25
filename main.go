@@ -27,14 +27,16 @@ func initRoutes(e *echo.Echo, db *sql.DB) {
 	e.GET("/", func(c echo.Context) error {
 		return c.String(http.StatusOK, "Welcome to WatchThis")
 	})
-	e.GET("/recomendation", handlers.GetRecomendation(db))
+	e.GET("/recommendation", handlers.GetRecommendation(db))
 	e.GET("/movies", handlers.GetMovies(db))
 	e.GET("/series", handlers.GetSeries(db))
-	e.GET("/recomendation/movie", handlers.GetMovieRecomendation(db))
-	e.GET("/recomendation/serie", handlers.GetSerieRecomendation(db))
+	e.GET("/recommendation/movie", handlers.GetMovieRecommendation(db))
+	e.GET("/recommendation/serie", handlers.GetSerieRecommendation(db))
 	e.GET("/rating/:name", handlers.GetRating(db))
 
-	e.POST("/recomendation", handlers.PostRecomendation(db))
+	// e.POST("/recommendation", handlers.PostRecommendation(db))
+	e.POST("/movie", handlers.PostMovie(db))
+	e.POST("/serie", handlers.PostSerie(db))
 	e.POST("/watched", handlers.PostWatched(db))
 
 }
