@@ -3,6 +3,7 @@ package models
 import (
 	"database/sql"
 	"encoding/json"
+	"fmt"
 	"io/ioutil"
 	"net/http"
 	"net/url"
@@ -41,7 +42,7 @@ func GetRating(db *sql.DB, title string) float64 {
 
 	r := &OMDB{}
 	err = json.Unmarshal(body, r)
-
+	fmt.Println(string(body))
 	if err != nil {
 		return 0
 	}

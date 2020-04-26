@@ -25,7 +25,7 @@ func main() {
 
 	e := echo.New()
 
-	e.Use(middleware.Logger())
+	// e.Use(middleware.Logger())
 	e.Use(middleware.Recover())
 
 	initRoutes(e, db)
@@ -44,7 +44,7 @@ func initRoutes(e *echo.Echo, db *sql.DB) {
 	e.GET("/recommendation/serie", handlers.GetSerieRecommendation(db))
 	e.GET("/rating/:name", handlers.GetRating(db))
 
-	// e.POST("/recommendation", handlers.PostRecommendation(db))
+	e.POST("/entertainment", handlers.PostEntertainment(db))
 	// e.POST("/movie", handlers.PostMovie(db))
 	// e.POST("/serie", handlers.PostSerie(db))
 	e.POST("/user", handlers.PostUser(db))
