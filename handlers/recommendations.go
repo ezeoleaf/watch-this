@@ -26,3 +26,10 @@ func GetSerieRecommendation(db *sql.DB) echo.HandlerFunc {
 		return c.JSON(http.StatusOK, models.GetSerieRecommendation(db))
 	}
 }
+
+// func PostWatched(db *sql.DB) echo.HandlerFunc {
+// 	return func(c echo.Context) error {
+// 		entertainmentId, _ := strconv.Atoi(c.FormValue("entertainmentId"))
+// 		userId, _ := strconv.Atoi(c.FormValue("userId"))
+// 	}
+// }
