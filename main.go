@@ -45,8 +45,8 @@ func initRoutes(e *echo.Echo, db *sql.DB) {
 	e.GET("/rating/:name", handlers.GetRating(db))
 
 	e.POST("/entertainment", handlers.PostEntertainment(db))
-	// e.POST("/movie", handlers.PostMovie(db))
-	// e.POST("/serie", handlers.PostSerie(db))
+	e.POST("/movie", handlers.PostMovie(db))
+	e.POST("/serie", handlers.PostSerie(db))
 	e.POST("/user", handlers.PostUser(db))
 	// e.POST("/watched", handlers.PostWatched(db))
 
