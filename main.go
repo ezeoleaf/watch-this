@@ -49,7 +49,7 @@ func initRoutes(e *echo.Echo, db *sql.DB) {
 	e.POST("/movie", handlers.PostMovie(db))
 	e.POST("/serie", handlers.PostSerie(db))
 	e.POST("/user", handlers.PostUser(db))
-	// e.POST("/watched", handlers.PostWatched(db))
+	e.POST("/watched", handlers.PostWatched(db))
 
 }
 

@@ -58,6 +58,26 @@ func GetEntertainmentByName(db *sql.DB, title string) int64 {
 	return id
 }
 
+func PostWatched(db *sql.DB, userID int, entertainmentID int) (int64, error) {
+	query := "INSERT INTO watched(user_id, entertainment_id, created_at) VALUES(?, ?, now())"
+
+	stmt, err := db.Prepare(query)
+
+	if err != nil {
+		panic(err)
+	}
+
+	defer stmt.Close()
+
+	r, e := stmt.Exec(userID, entertainmentID)
+
+	if e != nil {
+		panic(e)
+	}
+
+	return r.LastInsertId()
+}
+
 func PostEntertainment(db *sql.DB, title string, userID int, titleTypeId int) (int64, error) {
 	id := GetEntertainmentByName(db, title)
 

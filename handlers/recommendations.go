@@ -3,6 +3,7 @@ package handlers
 import (
 	"database/sql"
 	"net/http"
+	"strconv"
 
 	"github.com/ezeoleaf/watch-this/models"
 
@@ -27,9 +28,19 @@ func GetSerieRecommendation(db *sql.DB) echo.HandlerFunc {
 	}
 }
 
-// func PostWatched(db *sql.DB) echo.HandlerFunc {
-// 	return func(c echo.Context) error {
-// 		entertainmentId, _ := strconv.Atoi(c.FormValue("entertainmentId"))
-// 		userId, _ := strconv.Atoi(c.FormValue("userId"))
-// 	}
-// }
+func PostWatched(db *sql.DB) echo.HandlerFunc {
+	return func(c echo.Context) error {
+		entertainmentId, _ := strconv.Atoi(c.FormValue("entertainmentId"))
+		userId, _ := strconv.Atoi(c.FormValue("userId"))
+
+		id, err := models.PostWatched(db, userId, entertainmentId)
+
+		if err != nil {
+			return err
+		}
+
+		return c.JSON(http.StatusOK, H{
+			"created": id,
+		})
+	}
+}
